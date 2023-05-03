@@ -18,6 +18,9 @@ inputs:
   chat_token:
     description: "chat token"
     type: "string"
+  github_token:
+    description: "github token"
+    type: string
 
 runs:
   using: 'composite'
@@ -25,7 +28,7 @@ runs:
     - name: 'download binary'
       shell: 'bash'
       run: |-
-        curl -H "Authorization: Token ${{ github.token }}" -LO "https://github.com/drevell/hackathon/releases/download/v0.0.11/hackathon_0.0.11_linux_amd64.tar.gz"
+        curl -H "Authorization: Token ${{ inputs.github_token }}" -LO "https://github.com/drevell/hackathon/releases/download/v0.0.11/hackathon_0.0.11_linux_amd64.tar.gz"
         file hackathon_0.0.11_linux_amd64.tar.gz
         cat hackathon_0.0.11_linux_amd64.tar.gz
         tar xzf hackathon_0.0.11_linux_amd64.tar.gz
