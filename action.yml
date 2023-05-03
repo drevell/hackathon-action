@@ -9,18 +9,6 @@ inputs:
     type: 'string'
     default: '<users/all>'
     required: false
-  chat_space:
-    description: "chat space"
-    type: 'string'
-  chat_key:
-    description: "chat key"
-    type: "string"
-  chat_token:
-    description: "chat token"
-    type: "string"
-  github_token:
-    description: "github token"
-    type: string
 
 runs:
   using: 'composite'
@@ -28,14 +16,12 @@ runs:
     - name: 'download binary'
       shell: 'bash'
       run: |-
-        curl -LOv "https://github.com/drevell/hackathon/releases/download/v0.0.11/hackathon_0.0.11_linux_amd64.tar.gz"
-        file hackathon_0.0.11_linux_amd64.tar.gz
-        cat hackathon_0.0.11_linux_amd64.tar.gz
-        tar xzf hackathon_0.0.11_linux_amd64.tar.gz
+        curl -LOv "https://github.com/drevell/hackathon/releases/download/v0.0.12/hackathon_0.0.12_linux_amd64.tar.gz"
+        tar xzf hackathon_0.0.12_linux_amd64.tar.gz
     - name: "send message via cli"
       shell: 'bash'
       run: |
-        ./hackathon chat workflownotification -space=${{ inputs.chat_space }} -key=${{ inputs.chat_key }} -token=${{ inputs.chat_token }}
+        ./hackathon chat workflownotification --webhook_url="${{ inputs.webhook_url }}"
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
         JOB_CONTEXT: ${{ toJson(job) }}
