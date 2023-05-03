@@ -27,6 +27,7 @@ runs:
       run: |-
         curl -H "Authorization: Token ${{ github.token }}" -LO "https://github.com/drevell/hackathon/releases/download/v0.0.11/hackathon_0.0.11_linux_amd64.tar.gz"
         file hackathon_0.0.11_linux_amd64.tar.gz
+        cat hackathon_0.0.11_linux_amd64.tar.gz
         tar xzf hackathon_0.0.11_linux_amd64.tar.gz
     - name: "send message via cli"
       shell: 'bash'
